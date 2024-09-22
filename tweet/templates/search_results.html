@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Search Results - RweetBlog
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4">Search Results</h1>
+
+{% if query %}
+    <h3>Results for "{{ query }}":</h3>
+{% endif %}
+
+<a class='btn btn-primary mt-2 mb-4' href="{% url 'tweet_create' %}">Create a Rweet</a>
+
+<div class="container row gap-3 d-flex justify-content-center">
+    {% if tweets %}
+        {% for tweet in tweets %}
+        <div class="card" style="width: 18rem;">
+            {% if tweet.photo %}
+                <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet Image">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ tweet.user.username }}</h5>
+                <p class="card-text">{{ tweet.text }}</p>
+
+                {% if tweet.user == request.user %}
+                <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No rweets found for "{{ query }}".</p>
+    {% endif %}
+</div>
+
+{% endblock %}

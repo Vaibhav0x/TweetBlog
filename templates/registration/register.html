@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class='container p-4 mt-5 bg-secondary w-75 rounded border border-dark m-10'>
+    <h2 class='mb-4 text-center text-red-50 font-size'>Register Form</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <div class='d-grid gap-1 col-4 mx-auto'>
+            <button class="btn btn-primary mt-3">Register</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

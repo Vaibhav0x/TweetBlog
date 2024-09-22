@@ -1,0 +1,23 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Database files
+*.sqlite3
+db.sqlite3
+
+# macOS specific files
+.DS_Store
+
+# Media and static files (user uploads and generated files)
+media/*
+static/*
+
+# Local configuration
+local_settings.py
+.env
+
+# Virtual environment
+venv/
+env/
