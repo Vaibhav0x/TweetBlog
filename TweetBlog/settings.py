@@ -24,7 +24,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["rweet.vercel.app"]
+ALLOWED_HOSTS = [".vercel.app"]
 
 
 # Application definition
