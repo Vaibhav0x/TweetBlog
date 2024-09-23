@@ -10,8 +10,7 @@ This README will guide you through the steps to set up, run, and contribute to t
 - [Configuration](#configuration)
 - [Running the Project](#running-the-project)
 - [Database Setup](#database-setup)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
+- [Project Sample Images](#project-smaple-images)
 - [License](#license)
 
 ## Features
@@ -138,13 +137,13 @@ GRANT ALL PRIVILEGES ON DATABASE tweetblog TO your_user;
 
 # Project Sample Images
 Here are some sample images of my project
-![Login Page](media/photos/login_img.png)
-![Register Page](media/photos/reg_img.png)
-![Home Page](media/photos/home_screen.png)
-![Create Rweet](media/photos/input.png)
-![Update Rweet](media/photos/edit.png)
-![Delete Rweet](media/photos/delete.png)
-![As a Guest](media/photos/sample.png)
+![Login Page](media\photos\login_img.png)
+![Register Page](media\photos\eg_img.png)
+![Home Page](media\photos\home_screen.png)
+![Create Rweet](media\photos\input.png)
+![Update Rweet](media\photos\edit.png)
+![Delete Rweet](media\photos\delete.png)
+![As a Guest](media\photos\sample.png)
 
 ## Licence
 This project is licensed under the MIT License. See the LICENSE file for more details.
