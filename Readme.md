@@ -137,8 +137,8 @@ GRANT ALL PRIVILEGES ON DATABASE tweetblog TO your_user;
 
 # Project Sample Images
 Here are some sample images of my project
-![Login Page](TweetBlog/sample_img/login_img.png)
-![Register Page](sample_img/eg_img.png)
+![Login Page](sample_img/login_img.png)
+![Register Page](sample_img/reg_img.png)
 ![Home Page](sample_img/home_screen.png)
 ![Create Rweet](sample_img/input.png)
 ![Update Rweet](sample_img/edit.png)
