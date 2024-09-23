@@ -137,13 +137,13 @@ GRANT ALL PRIVILEGES ON DATABASE tweetblog TO your_user;
 
 # Project Sample Images
 Here are some sample images of my project
-![Login Page](media\photos\login_img.png)
-![Register Page](media\photos\eg_img.png)
-![Home Page](media\photos\home_screen.png)
-![Create Rweet](media\photos\input.png)
-![Update Rweet](media\photos\edit.png)
-![Delete Rweet](media\photos\delete.png)
-![As a Guest](media\photos\sample.png)
+![Login Page](sample_img/photos/login_img.png)
+![Register Page](sample_img/photos/eg_img.png)
+![Home Page](sample_img/photos/home_screen.png)
+![Create Rweet](sample_img/photos/input.png)
+![Update Rweet](sample_img/photos/edit.png)
+![Delete Rweet](sample_img/photos/delete.png)
+![As a Guest](sample_img/photos/sample.png)
 
 ## Licence
 This project is licensed under the MIT License. See the LICENSE file for more details.
