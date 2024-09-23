@@ -37,8 +37,8 @@ Before starting, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/tweetblog.git
-cd tweetblog
+git clone https://github.com/Vaibhav0x/TweetBlog.git
+cd TweetBlog
 ```
 
 ### 2. Setup Virtual Environment
@@ -48,7 +48,7 @@ cd tweetblog
 python -m venv .venv
 .venv/Scripts/activate
 ```
--for Linux/macOS :
+- for Linux/macOS :
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -57,10 +57,11 @@ source .venv/bin/activate
 ### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
+
 ```
 
 ## Configuration
-### 1. Create a .env file in the root directory (if not present):
+### 1. Create a `.env` file in the root directory (if not present):
 ```bash
 touch .env
 ```
@@ -87,7 +88,7 @@ EMAIL_HOST_PASSWORD=your-email-password
 ```
 Make sure to replace the placeholders with actual values for your project.
 
-### 3. Set up the .gitignore file to exlude .env and other sensitive files:
+### 3. Set up the `.gitignore` file to exlude `.env` and other sensitive files:
 ```bash
 echo '.env' >> .gitignore
 ```
@@ -116,8 +117,15 @@ Visit the application https://127.0.0.1:8000 .
 
 ---
 ## Database Setup (for PostgreSQL)
-### 1. Install PostgreSQL and create a database:
+### 1. Install `PostgreSQL` and create a database:
 
+[Install PostgreSQL](https://www.postgresql.org/download/)
+
+- Setup the PostgreSQl.
+
+- If you want to create database directly then open the `pgAdmin 4` after setup
+
+Else using `PostgreSQL Shell:`
 
 ```bash
 CREATE USER your_user WITH PASSWORD 'your_password';
@@ -125,9 +133,19 @@ ALTER ROLE your_user SET client_encoding TO 'utf8';
 ALTER ROLE your_user SET default_transaction_isolation TO 'read committed';
 ALTER ROLE your_user SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE tweetblog TO your_user;
-\q
 ```
 ---
+
+# Project Sample Images
+Here are some sample images of my project
+![Login Page](media/photos/login_img.png)
+![Register Page](media/photos/reg_img.png)
+![Home Page](media/photos/home_screen.png)
+![Create Rweet](media/photos/input.png)
+![Update Rweet](media/photos/edit.png)
+![Delete Rweet](media/photos/delete.png)
+![As a Guest](media/photos/sample.png)
+
 ## Licence
 This project is licensed under the MIT License. See the LICENSE file for more details.
 

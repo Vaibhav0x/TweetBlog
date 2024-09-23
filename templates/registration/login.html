@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class='container p-5 mt-5 text-center bg-secondary w-50 rounded border border-dark m-10'>
-    <h2 class='mb-4 text-center text-red-50 font-size'>Login Form  <span><div class="spinner-grow text-info"></div></span></h2>
+    <h2 class='mb-4 text-center text-red-50 font-size'>Login Account  <span><div class="spinner-grow text-info"></div></span></h2>
     <form method="post" class='form'>
         {% csrf_token %}
         <div class='form-group mb-3'>
@@ -14,7 +14,7 @@
     <div>
         <a href="{% url 'password_reset' %}">Forgot Password?</a>
     </div>
-    <p class='mt-3'>Don't have an account ?<a href="{% url 'register' %}"> Register </a></p>
+    <p class='mt-3'>Don't have an account ? (new user)<a href="{% url 'register' %}"> Register Account</a></p>
 </div>
 
 {% endblock %}
