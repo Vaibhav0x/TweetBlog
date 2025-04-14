@@ -6,7 +6,7 @@ This README will guide you through the steps to set up, run, and contribute to t
 
 Live : https://rweetblog.onrender.com/rweet/
 
-[![Watch the demo](sample_img/rweet thumbnail.png)](https://www.youtube.com/watch?v=qDNAsjsfqbQ)
+[![Watch the demo](sample_img/rweet_thumbnail.png)](https://www.youtube.com/watch?v=qDNAsjsfqbQ)
 
 
 ## Table of Contents
