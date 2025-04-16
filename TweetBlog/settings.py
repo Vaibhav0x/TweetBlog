@@ -74,6 +74,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TweetBlog.wsgi.application'
 
+# for the email authentication only one email user can register
+AUTHENTICATION_BACKENDS = [
+    'tweet.backends.EmailOrUsernameBackend',  
+    'django.contrib.auth.backends.ModelBackend',     
+]
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

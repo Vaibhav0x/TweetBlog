@@ -1,18 +1,56 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-# Create your models here.
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class Tweet(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-    text=models.TextField(max_length=300)
-    photo=models.ImageField(upload_to='photos/',blank=True, null=True)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(max_length=300)
+    photo = models.ImageField(upload_to='photos/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.user.username} - {self.text[:10]}'
 
-    # def total_likes(self):
-    #     return self.likes.count()
-        
+    def save(self, *args, **kwargs):
+        if self.photo:
+            self.photo.seek(0)
+            original_size = self.photo.size
+            # print(f"📷 Original image size: {original_size / 1024:.2f} KB")
+            if original_size > 512 * 1024:  # If image > 1MB
+                img = Image.open(self.photo)
+
+                # Convert to RGB if needed
+                if img.mode in ("RGBA", "P"):
+                    img = img.convert("RGB")
+
+                # Initial resize (you can tune this down more if needed)
+                img.thumbnail((800, 800))
+
+                # Start compressing in loop
+                quality = 70
+                while True:
+                    buffer = BytesIO()
+                    img.save(buffer, format='JPEG', quality=quality, optimize=True)
+                    size_kb = buffer.getbuffer().nbytes / 1024
+                    # print(f"🔧 Trying quality={quality}, size={size_kb / 1024:.2f} KB")
+
+                    if size_kb < 512 * 1024 or quality <= 20:
+                        # print(f"✅ Final compressed image size: { size_kb/ 1024:.2f} KB")
+                        break  # Stop if under 500kb or quality is too low
+
+                    quality -= 5  # Keep reducing quality
+
+                buffer.seek(0)
+                self.photo = InMemoryUploadedFile(
+                    buffer,
+                    'ImageField',
+                    f"{self.photo.name.split('.')[0]}.jpg",
+                    'image/jpeg',
+                    buffer.getbuffer().nbytes,
+                    None
+                )
+
+        super().save(*args, **kwargs)
