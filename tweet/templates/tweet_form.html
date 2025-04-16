@@ -2,33 +2,37 @@
 
 {% block title %}
 RweetBlog
-
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center mt-4"> Rweet</h1>
-<div class='d-grid justify-content-center'>
-    <h3>
-    <div class='mb-2'>
+<div class="container py-4">
+    <h1 class="text-center mt-4">Rweet</h1>
+    
+    <div class="text-center mb-4">
         <h3>
-        {%if form.instance.pk %} 
-        Edit Rweet 
-        {% else %} 
-        Create Rweet
-        {% endif %}
-        
+            {% if form.instance.pk %} 
+                Edit Rweet 
+            {% else %} 
+                Create Rweet
+            {% endif %}
+        </h3>
     </div>
-    <div class='p-2'>
-        <form method="post" enctype="multipart/form-data"
-        class="form">
-        {% csrf_token %}
-        {{form.as_p}}
+
+    <div class="d-flex justify-content-center">
+        <form method="post" enctype="multipart/form-data" class="w-100" style="max-width: 600px;">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <button class="btn btn-warning mb-3" type="submit">Submit</button>
+            </div>
+        </form>
     </div>
-    <h3>
-    <div class='d-grid gap-1 col-4 mx-auto'>
-        <button class="btn btn-warning mb-3" type="submit">Submit</button>
+    
+    <div class="text-center mt-3">
+        <a href="{% url 'tweet_list' %}" class="text-decoration-none">Back to Tweets</a>
     </div>
-    </form>
-    <a href="{% url 'tweet_list'}" class='text-decoration-none'>Back to Tweets </a>
 </div>
 {% endblock %}

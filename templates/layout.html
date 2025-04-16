@@ -16,69 +16,86 @@
 
 </head>
 <body>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+        <div class="container-fluid">
           <!--Left Icon or Name-->
           <a class="navbar-brand" href="{% url 'tweet_list' %}">Rweet</a>
 
-          <!-- Middle Search Bar -->
-          <form class="d-flex" role="search" id="searchForm" method='GET'
-          action="{% url 'search_tweets' %}"
-          >
-            <input class="form-control me-2" type="search" name='q' placeholder="Search" aria-label="Search" id='searchInput'>
-            <button class="btn btn-outline-success" type="submit" id="searchBtn" disabled>Search</button>
-          </form>
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const searchInput = document.getElementById('searchInput');
-                const searchButton = document.getElementById('searchBtn');
-        
-                function toggleButton() {
-                    if (searchInput.value.trim() === '') {
-                        searchButton.disabled = true;
-                    } else {
-                        searchButton.disabled = false;
-                    }
-                }
-        
-                searchInput.addEventListener('input', toggleButton);
-        
-                toggleButton();
-            });  // Remove Script and add the tweet_search.js file into in
-          </script>
+          <!-- Toggler for mobile -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#authLinks"
+              aria-controls="authLinks" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
 
+          <!-- Navbar content -->
           <!-- Right- Authentication Links-->
-          <div class='d-flex'>
-            {% if user.is_authenticated %}
-            <form method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button class="btn btn-danger mx-2" type="submit">Logout</button>
-            </form>
-            {% else %}
-            <a href="{% url 'register' %}" class="btn btn-primary mx-2">Register</a>
-            <a href="{% url 'login' %}" class="btn btn-success mx-2">Login</a>
-            {% endif %}
+          <div class="collapse navbar-collapse justify-content-end" id="authLinks">
+              <div class="d-flex mt-2 mt-lg-0">
+                  {% if user.is_authenticated %}
+                      <form method="post" action="{% url 'logout' %}" class="me-2">
+                          {% csrf_token %}
+                          <button class="btn btn-danger" type="submit">Logout</button>
+                      </form>
+                  {% else %}
+                      <a href="{% url 'register' %}" class="btn btn-primary me-2">Register</a>
+                      <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+                  {% endif %}
+              </div>
           </div>
         </div>
       </nav>
-    <div class="container ">
+
+      <!-- Search Bar (always visible, above main content) -->
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <form class="d-flex" role="search" method="GET" action="{% url 'search_tweets' %}">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Search tweets..." aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-success" type="submit" id="searchBtn" disabled>Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container py-4">
         {% block content %}
         {% endblock %}
     </div>
    
+    <!-- Footer -->
     {% block footer %}
-    <footer class="py-3 my-4">
-      <div class="container">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="{% url 'tweet_list' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-        </ul>
-        <p class="text-center text-body-secondary">© 2024 Vaibhav Raj, Inc</p>
-      </div>
+    <footer class="py-4 mt-auto bg-dark text-white">
+        <div class="container">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="{% url 'tweet_list' %}" class="nav-link px-2 text-white">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Features</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">About</a></li>
+            </ul>
+            <p class="text-center mb-0">© 2024 Vaibhav Raj, Inc</p>
+        </div>
     </footer>
-    {% endblock%}
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+    </script>
+    
+    <!-- Enable/Disable Search Button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchBtn');
+
+            function toggleButton() {
+                searchButton.disabled = searchInput.value.trim() === '';
+            }
+
+            searchInput.addEventListener('input', toggleButton);
+            toggleButton();
+        });
+    </script>
+
 </body>
 </html>

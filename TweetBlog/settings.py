@@ -54,6 +54,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'TweetBlog.urls'
 
+# for the email authentication only one email user can register
+AUTHENTICATION_BACKENDS = [
+    'tweet.backends.EmailOrUsernameBackend',  
+    'django.contrib.auth.backends.ModelBackend',     
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

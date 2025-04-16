@@ -57,19 +57,21 @@ def tweet_delete(request,tweet_id):
 
 #register the user
 def register(request):
-    if request.method=='POST':
-        form=UserRegistrationForm(request.POST)
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            user=form.save(commit=False)
+            user = form.save(commit=False)
             user.set_password(form.cleaned_data['password1'])
             user.save()
-            login(request, user)
+            
+            # Log in the user, specifying the backend explicitly
+            login(request, user, backend='tweet.backends.EmailOrUsernameBackend')
+
             return redirect('tweet_list')
     else:
-        form=UserRegistrationForm()
+        form = UserRegistrationForm()
 
-    return render(request,'registration/register.html',{'form':form})
-
+    return render(request, 'registration/register.html', {'form': form})
 def search_tweets(request):
     query = request.GET.get('q', '')
     tweets=[]
