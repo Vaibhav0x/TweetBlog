@@ -20,8 +20,13 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
         <div class="container-fluid">
           <!--Left Icon or Name-->
-          <a class="navbar-brand" href="{% url 'tweet_list' %}">Rweet</a>
-
+          <a class="navbar-brand fw-bold fs-4 text-primary" href="{% url 'tweet_list' %}">Rweet</a>
+            <div class="d-flex align-items-center gap-2">
+                <a class="navbar-brand small" href="{% url 'features_rweet' %}" style="font-size: 15px;">Features</a>
+                <a class="navbar-brand small" href="{% url 'pricing_view' %}" style="font-size: 15px;">Pricing</a>
+                <a class="navbar-brand small" href="{% url 'faq' %}" style="font-size: 15px;">FAQ's</a>
+                <a class="navbar-brand small" href="{% url 'about_rweet' %}" style="font-size: 15px;">About</a>
+            </div>
           <!-- Toggler for mobile -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#authLinks"
               aria-controls="authLinks" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,17 +51,6 @@
         </div>
       </nav>
 
-      <!-- Search Bar (always visible, above main content) -->
-    <div class="container my-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <form class="d-flex" role="search" method="GET" action="{% url 'search_tweets' %}">
-                    <input class="form-control me-2" type="search" name="q" placeholder="Search tweets..." aria-label="Search" id="searchInput">
-                    <button class="btn btn-outline-success" type="submit" id="searchBtn" disabled>Search</button>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="container py-4">
         {% block content %}
         {% endblock %}
@@ -68,12 +62,23 @@
         <div class="container">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="{% url 'tweet_list' %}" class="nav-link px-2 text-white">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-white">About</a></li>
+                <li class="nav-item"><a href="{% url 'features_rweet' %}" class="nav-link px-2 text-white">Features</a></li>
+                <li class="nav-item"><a href="{% url 'pricing_view' %}" class="nav-link px-2 text-white">Pricing</a></li>
+                <li class="nav-item"><a href="{% url 'faq' %}" class="nav-link px-2 text-white">FAQs</a></li>
+                <li class="nav-item"><a href="{% url 'about_rweet' %}" class="nav-link px-2 text-white">About</a></li>
             </ul>
-            <p class="text-center mb-0">© 2024 Vaibhav Raj, Inc</p>
+            <p class="text-center mb-0">© 2024 <a class="text-white text-decoration-none" href="https://vaibhav0x.github.io/Vaibhav-Portfolio/" target="_blank" rel="noopener noreferrer">Vaibhav Raj</a>, Inc</p>
+            <div class="text-center mb-0 px-2">
+                    <a target="_blank" href="https://www.linkedin.com/in/vaibhav-raj-0x/" rel="noopener noreferrer">
+                        <img src="../../media/photos/linkedin.png" alt="LinkedIn" style="max-width: 25px; max-height: 25px;">
+                    </a>
+                    <a target="_blank" href="https://github.com/Vaibhav0x" rel="noopener noreferrer">
+                        <img src="../../media/photos/github.png" alt="GitHub" style="max-width: 25px; max-height: 25px;">
+                    </a>
+                    <a target="_blank" href="https://leetcode.com/u/Vaibhav0x/" rel="noopener noreferrer">
+                        <img src="../../media/photos/leetcode.png" alt="Leetcode" style="max-width: 25px; max-height: 25px;">
+                    </a>
+            </div>
         </div>
     </footer>
     {% endblock %}
@@ -82,20 +87,6 @@
         crossorigin="anonymous">
     </script>
     
-    <!-- Enable/Disable Search Button -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const searchInput = document.getElementById('searchInput');
-            const searchButton = document.getElementById('searchBtn');
-
-            function toggleButton() {
-                searchButton.disabled = searchInput.value.trim() === '';
-            }
-
-            searchInput.addEventListener('input', toggleButton);
-            toggleButton();
-        });
-    </script>
 
 </body>
 </html>

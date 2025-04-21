@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Pricing - RweetBlog
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-5">Choose a Pricing Plan</h2>
+    <div class="row justify-content-center">
+        {% for plan in plans %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ plan.title }}</h5>
+                    <h2 class="card-price">${{ plan.price }}<small class="text-muted">/mo</small></h2>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        {% for feature in plan.features %}
+                        <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="#" class="btn btn-primary">Choose {{ plan.title }}</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

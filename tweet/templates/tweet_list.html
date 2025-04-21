@@ -5,13 +5,23 @@ RweetBlog
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center mt-4">Rweet</h1>
 
 <div class="text-center mb-4">
     <a class="btn btn-primary" href="{% url 'tweet_create' %}">Create a Rweet</a>
 </div>
 
 <div class="container">
+<!-- Search Bar (always visible, above main content) -->
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <form class="d-flex" role="search" method="GET" action="{% url 'search_tweets' %}">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Search tweets..." aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-success" type="submit" id="searchBtn" disabled>Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
         {% for tweet in tweets %}
             <div class="col-sm-10 col-md-6 col-lg-4 d-flex align-items-stretch mb-4">
@@ -34,5 +44,19 @@ RweetBlog
         {% endfor %}
     </div>
 </div>
+<!-- Enable/Disable Search Button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchBtn');
+
+            function toggleButton() {
+                searchButton.disabled = searchInput.value.trim() === '';
+            }
+
+            searchInput.addEventListener('input', toggleButton);
+            toggleButton();
+        });
+    </script>
 
 {% endblock %}
