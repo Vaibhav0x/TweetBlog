@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
+import os
 
 class Tweet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -54,3 +55,9 @@ class Tweet(models.Model):
                 )
 
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Delete the photo file from the media folder
+        if self.photo and os.path.isfile(self.photo.path):
+            os.remove(self.photo.path)
+        super().delete(*args, **kwargs)
