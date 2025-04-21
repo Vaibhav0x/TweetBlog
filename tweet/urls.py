@@ -8,6 +8,10 @@ urlpatterns = [
     path('<int:tweet_id>/delete/', views.tweet_delete, name='tweet_delete'),
     path('register/', views.register, name='register'),
     path('search/', views.search_tweets, name='search_tweets'),
+    path('faq/', views.faq_list, name='faq'),
+    path('about/',views.about_page,name='about_rweet'),
+    path('pricing/', views.pricing_view, name='pricing_view'),
+    path('features/',views.features_view,name='features_rweet'),
 
     # Catch-all pattern for any other URLs under /tweet/
     path('<path:unmatched>/', views.redirect_to_tweet_list),
