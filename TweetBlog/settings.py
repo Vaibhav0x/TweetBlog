@@ -28,7 +28,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-SESSION_COOKIE_AGE = 20
+# 24 hours session management
+SESSION_COOKIE_AGE = 86400
 
 # Application definition
 

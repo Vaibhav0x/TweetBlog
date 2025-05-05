@@ -8,7 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', lambda request: redirect('tweet_list', permanent=False)),  # Redirect to the tweet_list view
+    path('', lambda request: redirect('tweet_list', permanent=False)), 
     path('rweet/', include('tweet.urls')),
     path('accounts/',include('django.contrib.auth.urls')),
 

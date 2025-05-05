@@ -6,10 +6,10 @@ User = get_user_model()
 class EmailOrUsernameBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
-            user = User.objects.get(email=username)  # Try email first
+            user = User.objects.get(email=username)  
         except User.DoesNotExist:
             try:
-                user = User.objects.get(username=username)  # Then try username
+                user = User.objects.get(username=username) 
             except User.DoesNotExist:
                 return None
 

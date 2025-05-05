@@ -5,7 +5,6 @@ from .forms import TweetForm,UserRegistrationForm
 from django.shortcuts import get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-# Create your views here.
 
 def index(request):
     return render(request,'index.html')
@@ -16,7 +15,7 @@ def tweet_list(request):
     tweets=Tweet.objects.all().order_by('-created_at')
     return render(request,'tweet_list.html',{'tweets':tweets})
 
-#create tweets
+# create tweets
 @login_required
 def tweet_create(request):
     if request.method=='POST':
@@ -55,7 +54,7 @@ def tweet_delete(request,tweet_id):
     return render(request,'tweet_confirm_delete.html',{'tweet':tweet})
 
 
-#register the user
+# register the user
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -64,7 +63,6 @@ def register(request):
             user.set_password(form.cleaned_data['password1'])
             user.save()
             
-            # Log in the user, specifying the backend explicitly
             login(request, user, backend='tweet.backends.EmailOrUsernameBackend')
 
             return redirect('tweet_list')
@@ -72,13 +70,14 @@ def register(request):
         form = UserRegistrationForm()
 
     return render(request, 'registration/register.html', {'form': form})
+
 def search_tweets(request):
     query = request.GET.get('q', '')
     tweets=[]
     if query:
         tweets = Tweet.objects.filter(
             Q(text__icontains=query) | Q(user__username__icontains=query)
-          )  # Filter based on the search query on text or username
+          ) 
     else:
         tweets=[]
         tweets = Tweet.objects.all()
@@ -86,7 +85,6 @@ def search_tweets(request):
     return render(request, 'search_results.html', {'tweets': tweets, 'query': query})
 
 def redirect_to_tweet_list(request, unmatched):
-    # Redirect to the tweet list page
     return redirect('tweet_list')
 
 def faq_list(request):
@@ -97,7 +95,6 @@ def faq_list(request):
         {'question': 'Can I edit a Rweet after posting?', 'answer': 'Yes, you can edit your post after posting on Rweetblog.'},
         {'question':'Can I delete a rweet after posting?','answer':'Yes, you can delete your rweet if you want to delete.'},
         {'question':'Can I reset my password after register the account','answer':'Yes, you can reset your password using reset password button and check the mail and click on mail link and reset the password details'},
-        # Add more as needed
     ]
     return render(request,'faq.html',{'faqs': faqs})
 

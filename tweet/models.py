@@ -19,15 +19,13 @@ class Tweet(models.Model):
         if self.photo:
             self.photo.seek(0)
             original_size = self.photo.size
-            # print(f"📷 Original image size: {original_size / 1024:.2f} KB")
+            # print(f"Original image size: {original_size / 1024:.2f} KB")
             if original_size > 512 * 1024:  # If image > 1MB
                 img = Image.open(self.photo)
 
-                # Convert to RGB if needed
                 if img.mode in ("RGBA", "P"):
                     img = img.convert("RGB")
 
-                # Initial resize (you can tune this down more if needed)
                 img.thumbnail((800, 800))
 
                 # Start compressing in loop
@@ -36,13 +34,13 @@ class Tweet(models.Model):
                     buffer = BytesIO()
                     img.save(buffer, format='JPEG', quality=quality, optimize=True)
                     size_kb = buffer.getbuffer().nbytes / 1024
-                    # print(f"🔧 Trying quality={quality}, size={size_kb / 1024:.2f} KB")
+                    # print(f"Trying quality={quality}, size={size_kb / 1024:.2f} KB")
 
                     if size_kb < 512 * 1024 or quality <= 20:
-                        # print(f"✅ Final compressed image size: { size_kb/ 1024:.2f} KB")
+                        # print(f"Final compressed image size: { size_kb/ 1024:.2f} KB")
                         break  # Stop if under 500kb or quality is too low
 
-                    quality -= 5  # Keep reducing quality
+                    quality -= 5  
 
                 buffer.seek(0)
                 self.photo = InMemoryUploadedFile(
@@ -57,7 +55,6 @@ class Tweet(models.Model):
         super().save(*args, **kwargs)
     
     def delete(self, *args, **kwargs):
-        # Delete the photo file from the media folder
         if self.photo and os.path.isfile(self.photo.path):
             os.remove(self.photo.path)
         super().delete(*args, **kwargs)
