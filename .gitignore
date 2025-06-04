@@ -10,9 +10,11 @@ db.sqlite3
 # macOS specific files
 .DS_Store
 
-# Media and static files (user uploads and generated files)
+# Media files (user uploads and generated files)
 media/*
-static/*
+
+# Ignore collected static files (production)
+staticfiles/
 
 # Local configuration
 local_settings.py
