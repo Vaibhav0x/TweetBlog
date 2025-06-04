@@ -2,8 +2,13 @@
 from pathlib import Path
 import os
 from decouple import config
-import dj_database_url
+# import dj_database_url
+import os
+from dotenv import load_dotenv
+from urllib.parse import urlparse
 
+# Load environment variables from .env file
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -95,9 +100,18 @@ WSGI_APPLICATION = 'TweetBlog.wsgi.application'
 #     }
 # }
 
-# Use this for the render production
+# Parse the Neon DB connection string
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': tmpPostgres.path.replace('/', ''),
+        'USER': tmpPostgres.username,
+        'PASSWORD': tmpPostgres.password,
+        'HOST': tmpPostgres.hostname,
+        'PORT': 5432,
+    }
 }
 
 
