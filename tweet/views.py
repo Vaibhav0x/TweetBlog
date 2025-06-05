@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 import traceback
+from django.http import HttpResponse
+
 
 def index(request):
     return render(request,'index.html')
@@ -28,11 +30,8 @@ def tweet_create(request):
                 tweet.save() 
                 return redirect('tweet_list')
             except Exception as e:
-                print("Exception during tweet save:")
-                print(traceback.format_exc())
                 return HttpResponse("An error occurred while saving the tweet.", status=500) 
         else:
-            print("TweetForm errors:", form.errors)
             return render(request, 'tweet_form.html', {'form': form}) 
     else:
         form=TweetForm()
