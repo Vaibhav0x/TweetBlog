@@ -21,10 +21,13 @@ def tweet_create(request):
     if request.method=='POST':
         form=TweetForm(request.POST,request.FILES)
         if form.is_valid():
-         tweet=form.save(commit=False)
-         tweet.user=request.user
-         tweet.save() 
-         return redirect('tweet_list')  
+            try:
+                tweet=form.save(commit=False)
+                tweet.user=request.user
+                tweet.save() 
+                return redirect('tweet_list')
+            except Exception as e:
+                return HttpResponse("An error occurred while saving the tweet.", status=500)  
     else:
         form=TweetForm()
     return render(request,'tweet_form.html',{'form':form})
