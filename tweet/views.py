@@ -5,6 +5,7 @@ from .forms import TweetForm,UserRegistrationForm
 from django.shortcuts import get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+import traceback
 
 def index(request):
     return render(request,'index.html')
