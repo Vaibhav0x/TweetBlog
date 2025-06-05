@@ -147,7 +147,7 @@ def features_view(request):
         {'title': 'Image Uploads', 'description': 'Attach images to your Rweets to express yourself visually.'},
         {'title': 'User Profiles', 'description': 'Create and customize your profile for others to discover.'},
         {'title': 'Particular User View', 'description': 'To view all the rweets but only update, delete your rweets.'},
-        {'title': 'Rest Password', 'description': 'Reset your password using gmail link.'},
+        {'title': 'Reset Password', 'description': 'Reset your password using gmail link.'},
         {'title': 'Responsive Design', 'description': 'Enjoy a seamless experience on both desktop and mobile.'},
     ]
     return render(request, 'features.html', {'features': features})
