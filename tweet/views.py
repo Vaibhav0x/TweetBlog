@@ -61,6 +61,16 @@ def tweet_delete(request,tweet_id):
         return redirect('tweet_list')
     return render(request,'tweet_confirm_delete.html',{'tweet':tweet})
 
+# Like count
+@login_required
+def toggle_like(request, tweet_id):
+    tweet = get_object_or_404(Tweet, id=tweet_id)
+    if request.user in tweet.likes.all():
+        tweet.likes.remove(request.user)
+    else:
+        tweet.likes.add(request.user)
+    return redirect('tweet_list')
+
 
 # register the user
 def register(request):

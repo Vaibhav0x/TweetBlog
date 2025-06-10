@@ -8,10 +8,13 @@ class Tweet(models.Model):
     photo = CloudinaryField('image', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User, related_name='liked_tweets', blank=True)
 
     def __str__(self):
         return f'{self.user.username} - {self.text[:10]}'
 
+    def like_count(self):
+        return self.likes.count()
     # Optional: Cloudinary auto handles image storage, so custom save/delete logic is not needed.
 
 # from django.db import models
